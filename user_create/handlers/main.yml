@@ -1,0 +1,10 @@
+---
+# handlers file for user_create
+#
+#
+#
+ 
+   - name : restart sshd
+     service:
+             name: ssh
+             state: restarted

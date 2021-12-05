@@ -1,0 +1,16 @@
+
+
+ - pause : 
+    prompt : Provide A Valid Url please 
+   register : test
+
+ - name : Download pcap file
+   delegate_to: localhost
+   get_url :
+      url : "{{ test.user_input }}" 
+      dest : /home/cloud_user/ansible/roles
+ - name : Copying pcap file to forescout's home
+   ansible.builtin.copy :
+       src : /home/cloud_user/ansible/roles/{{ test.user_input | basename }}
+       dest : /home/forescout 
+

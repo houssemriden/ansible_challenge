@@ -1,0 +1,24 @@
+---
+# tasks file for user_create
+#
+#
+
+
+          - name : Creating User with ssh key and setting privileges
+            ansible.builtin.user :
+             name : forescout
+             shell : /bin/bash #restricted bash is going to be used to give minimum access we can also use /bin/false
+             generate_ssh_key: yes
+          - name : Setting Authorized key for SSH Authentication
+            ansible.posix.authorized_key:
+             user : forescout
+             manage_dir : no
+             state : present
+             key: "{{ lookup('file', '/home/cloud_user/.ssh/id_rsa.pub')}}"
+          - name : Disabling Password Based Authentication
+            ansible.builtin.lineinfile:
+             path : /etc/ssh/sshd_config
+             regexp: '^(#\s*)?PasswordAuthentication '
+             line: 'PasswordAuthentication no'
+            notify :
+                    - restart sshd

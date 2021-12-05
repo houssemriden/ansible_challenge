@@ -1,0 +1,13 @@
+
+- name : Check if dummy interface exists 
+  ansible.builtin.shell : ip a | grep replay 
+  register : replay 
+  ignore_errors : true
+- name : printing replay value 
+  ansible.builtin.debug:
+   var : replay 
+- name : Create a dummy network interface named replay 
+  ansible.builtin.shell :   ip link add replay type dummy
+  when : replay.stdout == ""
+- name : Enable Promiscuous mode and start the interface
+  ansible.builtin.shell :   ip link set replay promisc on && ip link set replay up  

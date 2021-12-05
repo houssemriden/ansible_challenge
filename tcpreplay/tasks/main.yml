@@ -1,0 +1,20 @@
+---
+
+
+- name  :  making forescout run tcpreplay 
+  file:
+    path: /usr/bin/tcpreplay
+    owner: forescout
+    mode: u+s
+- name: Giving capability to run tcpreplay
+  community.general.capabilities:
+              path: /usr/bin/tcpreplay
+              capability: CAP_NET_ADMIN,CAP_NET_RAW+ep
+              state : present 
+
+- name  : giving capability to run tcpdump
+  community.general.capabilities:
+              path: /usr/sbin/tcpdump
+              capability: CAP_NET_ADMIN,CAP_NET_RAW+ep
+              state : present
+# tasks file for tcpreplay
