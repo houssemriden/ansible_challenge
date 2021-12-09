@@ -13,8 +13,9 @@
     prompt : Type file name to run tcpreplay
   register : test
 - name: Run tcp
-  ansible.builtin.command: tcpreplay -i replay --loop=0 /home/forescout/"{{ test.user_input }}" 
-   
+  ansible.builtin.command: tcpreplay -i replay --loop=0 /home/forescout/{{ test.user_input }}
+  async : 1000
+  poll : 0   
 
 
 # tasks file for file_tcp

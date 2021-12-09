@@ -13,5 +13,5 @@
   # - network_setup
   # - user_create
   # - file_management
-  # - tcpreplay
-  - file_tcp 
+  - tcpreplay
+    #- file_tcp 

@@ -1,0 +1,16 @@
+---
+- hosts: all
+  remote_user: forescout
+  gather_facts: no
+
+  tasks :
+       - name: Run tcpdump
+         ansible.builtin.command: tcpdump -i replay -w capture.pcap 
+         async : 1000
+         poll : 0
+         register : dum
+       - debug :
+               msg :  "{{ dum.started }}"
+       - set_fact:
+               one_fact: dum
+
