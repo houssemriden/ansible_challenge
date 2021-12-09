@@ -1,0 +1,20 @@
+---
+- name : Available pcap files
+  find : 
+   paths : /home/forescout
+   patterns : '*.pcap'
+  register : file
+- name : showing files 
+  debug :
+          msg:  "Pcap files avaialable in forescout home are : {{ file.files | map(attribute='path')  }}"
+          #msg: "pcap file available are {{ item.path | basename }}"
+          #  with_items: "{{ file.files }}"
+- pause : 
+    prompt : Type file name to run tcpreplay
+  register : test
+- name: Run tcp
+  ansible.builtin.command: tcpreplay -i replay --loop=0 /home/forescout/"{{ test.user_input }}" 
+   
+
+
+# tasks file for file_tcp

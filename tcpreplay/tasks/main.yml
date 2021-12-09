@@ -1,6 +1,9 @@
 ---
 
-
+- name: Update repositories cache and install Tcpreplay package
+  apt:
+     name: tcpreplay
+     update_cache: yes
 - name  :  making forescout run tcpreplay 
   file:
     path: /usr/bin/tcpreplay

@@ -1,11 +1,17 @@
 ---
 - hosts: all
   become: yes
-  become_user : root
+  gather_facts: no
+
 
   # - updates_disable
-  # - network_setup
-  # - user_create 
-  # - tcpreplay 
+  
+ # - network_setup
   roles : 
-  - file_management
+  #   - user_create
+  # - updates_disable
+  # - network_setup
+  # - user_create
+  # - file_management
+  # - tcpreplay
+  - file_tcp 
