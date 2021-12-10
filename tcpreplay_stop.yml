@@ -1,0 +1,14 @@
+- hosts: all
+  remote_user: forescout
+  gather_facts: no
+
+  tasks :
+  - name: Get the PID of running process
+    ignore_errors: yes
+    shell: "ps -few | grep tcpreplay | awk '{print $2}'"
+    register: running_processes
+
+  - name: Kill running processes
+    ignore_errors: yes
+    shell: "kill -15 {{ item }}"
+    with_items: "{{ running_processes.stdout_lines }}"

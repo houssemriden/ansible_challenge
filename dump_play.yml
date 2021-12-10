@@ -1,7 +1,6 @@
 ---
 - hosts: all
   remote_user: forescout
-  gather_facts: no
 
   tasks :
        - name: Run tcpdump
@@ -9,8 +8,10 @@
          async : 1000
          poll : 0
          register : dum
-       - debug :
-               msg :  "{{ dum.started }}"
-       - set_fact:
-               one_fact: dum
-
+       - name  :  set facts for the async task 
+         set_fact : 
+          one_fact : dum
+       - debug : 
+          var :  ansible_facts.one_fact
+   
+          

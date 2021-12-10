@@ -1,0 +1,9 @@
+- hosts: all
+  remote_user: forescout
+  gather_facts: no
+
+  tasks :
+  - name: Removing capture file 
+    ansible.builtin.file : 
+     path : /home/forescout/capture.pcap
+     state: absent

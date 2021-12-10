@@ -1,0 +1,12 @@
+- hosts: all
+  remote_user: forescout
+  gather_facts: no
+
+  tasks :
+  - name: Storing  file size in Mb in variable 
+    ignore_errors: yes
+    shell: ls -l capture.pcap --block-size=M | awk '{print $5}'
+    register: s
+
+  - debug :
+          msg : "Capture.pcap size is : {{ s.stdout }}" 
