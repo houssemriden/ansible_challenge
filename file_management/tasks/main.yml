@@ -5,6 +5,7 @@
   register : test
 - name : Download 
   delegate_to: localhost
+  become: false
   get_url :
       url : "{{ test.user_input }}" 
       dest : /home/cloud_user/ansible/roles
